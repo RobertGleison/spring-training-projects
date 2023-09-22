@@ -3,7 +3,6 @@ package entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import enums.OrderStatus;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.time.Instant;
