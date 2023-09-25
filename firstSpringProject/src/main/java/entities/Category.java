@@ -1,13 +1,14 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
+@Table(name="tb_category")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,6 +16,9 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @ManyToMany(mappedBy= "categories")
+    @JsonIgnore //to avoid infinite loop in database
+    private Set<Product> products = new HashSet<>();
 
 
     public Category() {
@@ -39,6 +43,10 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
