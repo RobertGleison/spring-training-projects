@@ -27,5 +27,20 @@ public class UserService {
         return repository.save(obj);
     }
 
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
 
+    public User update(Long id, User obj){
+        //Keep the id staged by JPA, does not need to go to database, like findId
+        User entity = repository.getReferenceById(id);
+        updateData(entity,obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(User entity, User obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+    }
 }
