@@ -5,26 +5,27 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 @Entity
-public class Product {
+public class Product implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
-    private int priceinCents;
+    private int priceInCents;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, String description, int priceinCents) {
+    public Product(Integer id, String name, String description, int priceInCents) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.priceinCents = priceinCents;
+        this.priceInCents = priceInCents;
     }
 
     public Integer getId() {
@@ -52,11 +53,11 @@ public class Product {
     }
 
     public int getPriceinCents() {
-        return priceinCents;
+        return priceInCents;
     }
 
     public void setPriceinCents(int priceinCents) {
-        this.priceinCents = priceinCents;
+        this.priceInCents = priceinCents;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", priceinCents=" + priceinCents +
+                ", priceinCents=" + priceInCents +
                 '}';
     }
 }

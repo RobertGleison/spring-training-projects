@@ -9,20 +9,17 @@ import java.util.Optional;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepository repository;
+    private ProductRepository repository;
 
-    public Optional<Product> getProductById(Integer id) {
-        //IMplement Exception handler
+    public Product getProductById(Integer id) {
+        //Implement Exception handler
         Optional<Product> product = repository.findById(id);
-        return repository.findById(id);
+        //Implement a more safe way instead of .get(), like orElseThrow
+        return product.get();
     }
 
     public List<Product> getAllProducts() {
-        List<Product> products = repository.findAll();
-        return products;
-    }
+        return repository.findAll();
 
-    public void deleteProductById(Integer id) {
-        repository.deleteById(id);
     }
 }

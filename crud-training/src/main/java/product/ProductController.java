@@ -13,26 +13,18 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductService service;
-
-    @GetMapping("/{id}")
-    //Improve this in the future
-    public ResponseEntity<Optional<Product>> getProductById(@PathVariable Integer id) {
-        Optional<Product> product = service.getProductById(id);
-        return ResponseEntity.ok().body(product);
-    }
+    private ProductService service;
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = service.getAllProducts();
         return ResponseEntity.ok().body(products);
     }
-
-    //Fiz this variable id
-    @DeleteMapping("/{id}")
-    public void deleteProductById(@PathVariable Integer id) {
-        service.deleteProductById(id);
-
+    @GetMapping("/{id}")
+    //Improve this in the future
+    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
+        Product product = service.getProductById(id);
+        return ResponseEntity.ok().body(product);
     }
 }
 
