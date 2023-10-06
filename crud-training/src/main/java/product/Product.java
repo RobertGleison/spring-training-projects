@@ -1,21 +1,23 @@
 package product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 
 @Entity
+@Table(name="products")
 public class Product implements Serializable {
+    private static final long serialVersionUID= 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name="Name")
     private String name;
+    @Column(name="Description")
     private String description;
+    @Column(name="PriceInCents")
     private int priceInCents;
 
     public Product() {
