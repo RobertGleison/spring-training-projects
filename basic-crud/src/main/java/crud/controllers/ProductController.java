@@ -1,7 +1,6 @@
 package crud.controllers;
 
 import crud.entities.Product;
-import crud.repositories.ProductRepository;
 import crud.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
@@ -21,6 +20,6 @@ public class ProductController {
     @GetMapping("/all")
     public ResponseEntity<List<Product>> findAll(){
         List<Product> products = service.findAll();
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(products);
     }
 }

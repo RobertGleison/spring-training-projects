@@ -15,9 +15,7 @@ public class ProductService {
     private ProductRepository repository;
 
     public List<Product> findAll(){
-        List<Product> products = new ArrayList<>();
-        products = repository.findAll();
-        return products;
+        return repository.findAll();
     }
 
 }
