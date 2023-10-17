@@ -2,12 +2,13 @@ package crud.application.controllers;
 
 import crud.application.entities.Product;
 import crud.application.services.ProductService;
+import jakarta.servlet.Servlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 
 
@@ -29,6 +30,27 @@ public class ProductController {
     public ResponseEntity<Product> findById(@PathVariable Integer id){
        Product product = service.findById(id);
        return ResponseEntity.ok(product);
-
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> insert(@RequestBody Product product){
+        Product prod = service.insert(product);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(product.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(prod);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> update(@PathVariable Integer id, @RequestBody Product product){
+        product = service.update(id, product);
+        return ResponseEntity.ok().body(product);
+    }
+
 }
