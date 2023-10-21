@@ -20,25 +20,25 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll(){
+    public ResponseEntity<List<Product>> findAllProducts(){
         List<Product> products = service.findAll();
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Integer id){
+    public ResponseEntity<Product> findProductById(@PathVariable Integer id){
        Product product = service.findById(id);
        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ResponseEntity<Product> insert(@RequestBody Product product){
+    public ResponseEntity<Product> insertProduct(@RequestBody Product product){
         product = service.insert(product);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(product.getId())
@@ -47,7 +47,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Integer id, @RequestBody Product product){
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product){
         product = service.update(id, product);
         return ResponseEntity.ok().body(product);
     }

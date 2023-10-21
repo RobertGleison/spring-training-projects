@@ -1,4 +1,4 @@
-INSERT INTO products (Id, Name, Description, Price)
+INSERT INTO products (Id,Name, Description, Price)
 VALUES
 (1,'TV','Full HD TV', 1000.50),
 (2,'Computer','Intel i7', 2100.00),
