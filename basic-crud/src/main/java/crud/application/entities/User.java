@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -21,17 +20,19 @@ public class User implements UserDetails{
     private String email;
     private String phone;
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public User() {
     }
 
-    public User(Integer id, String name, String email, String phone, String password) {
+    public User(Integer id, String name, String email, String phone, String password, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.role = UserRole.valueOf(role.toLowerCase());
     }
 
     public Integer getId() {
@@ -66,16 +67,28 @@ public class User implements UserDetails{
         this.phone = phone;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN){
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         }
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -103,9 +116,6 @@ public class User implements UserDetails{
         return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public boolean equals(Object o) {

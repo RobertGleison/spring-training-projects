@@ -5,13 +5,16 @@ import crud.application.repositories.UserRepository;
 import crud.application.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
@@ -49,6 +52,12 @@ public class UserService {
         newUser.setEmail(oldUser.getEmail());
         newUser.setPassword(oldUser.getPassword());
         newUser.setPhone(oldUser.getPhone());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //Spring Security use this method to consult in database a specific user
+        return repository.findByEmail(username);
     }
 
 
