@@ -3,7 +3,9 @@ package crud.application.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="categories")
@@ -12,6 +14,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
+
 
     public Category(Integer id, String name) {
         this.id = id;

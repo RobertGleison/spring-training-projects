@@ -4,7 +4,7 @@ package crud.application.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name="products")
@@ -15,6 +15,7 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private Double price;
+
 
     public Product() {
     }
