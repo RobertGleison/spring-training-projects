@@ -1,9 +1,7 @@
 package crud.application.controllers;
 
-import crud.application.entities.Product;
-import crud.application.entities.User;
+import crud.application.entities.user.User;
 import crud.application.services.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package crud.application.entities;
+package crud.application.entities.user;
 
 import crud.application.enums.UserRole;
 import jakarta.persistence.*;
@@ -26,13 +26,21 @@ public class User implements UserDetails{
     public User() {
     }
 
-    public User(Integer id, String name, String email, String phone, String password, String role) {
+    public User(Integer id, String name, String email, String phone, String password, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
-        this.role = UserRole.valueOf(role.toLowerCase());
+        this.role = role;
+    }
+
+    public User(String name, String email, String password, UserRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+
     }
 
     public Integer getId() {

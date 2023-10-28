@@ -1,6 +1,6 @@
 package crud.application.services;
 
-import crud.application.entities.User;
+import crud.application.entities.user.User;
 import crud.application.repositories.UserRepository;
 import crud.application.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
