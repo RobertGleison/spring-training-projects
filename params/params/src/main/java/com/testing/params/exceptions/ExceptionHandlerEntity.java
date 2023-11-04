@@ -16,12 +16,14 @@ public class ExceptionHandlerEntity {
     private static final Logger logger = Logger.getLogger(ExceptionHandlerEntity.class.getName());
 
     @ExceptionHandler(MismatchOperandsException.class)
-    public ResponseEntity<StandardError> inputError(MismatchOperandsException mismatchOperandsException){
-        StandardError error = new StandardError(Instant.now(), "406" ,mismatchOperandsException.getMessage(),"Input is invalid");
-        logger.info("This method is working");
-        System.out.println("This method is working");
+    public ResponseEntity<StandardError> inputError(MismatchOperandsException e){
+        StandardError error = new StandardError(Instant.now(), "406" ,e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(error);
     }
 
-
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseEntity<StandardError> divisionByZero(ArithmeticException e){
+        StandardError error = new StandardError(Instant.now(),"406",e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(error);
+    }
 }

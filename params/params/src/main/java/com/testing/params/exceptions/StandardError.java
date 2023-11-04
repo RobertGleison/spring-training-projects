@@ -9,16 +9,14 @@ public class StandardError implements Serializable {
     private Instant timeStamp;
     private String status;
     private String message;
-    private String error;
 
     public StandardError() {
     }
 
-    public StandardError(Instant timeStamp, String status, String message, String error) {
+    public StandardError(Instant timeStamp, String status, String message) {
         this.timeStamp = timeStamp;
         this.status = status;
         this.message = message;
-        this.error = error;
     }
 
     public Instant getTimeStamp() {
@@ -43,13 +41,5 @@ public class StandardError implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
     }
 }

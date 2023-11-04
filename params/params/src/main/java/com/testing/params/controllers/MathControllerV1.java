@@ -16,7 +16,7 @@ public class MathControllerV1 {
     private MathServiceImpl mathServiceImpl;
 
     @GetMapping("/sum/{a}/{b}")
-    public ResponseEntity<Integer> sum(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
+    public ResponseEntity<Double> sum(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
         return ResponseEntity.ok().body(mathServiceImpl.sum(a,b));
     }
 

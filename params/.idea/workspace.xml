@@ -78,15 +78,4 @@
     <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
     <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/params/src/main/java/com/testing/params/exceptions/ExceptionHandlerEntity.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>
