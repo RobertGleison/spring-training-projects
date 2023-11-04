@@ -1,8 +1,8 @@
 package com.testing.params.services;
 
 public interface MathService {
-    Integer sum(int a, int b);
-    Integer subtract(int a, int b);
-    Integer multiply(int a, int b);
-    Double divide(double a, double b);
+    Integer sum(String a, String b);
+    Integer subtract(String a, String b);
+    Integer multiply(String a, String b);
+    Double divide(String a, String b);
     }

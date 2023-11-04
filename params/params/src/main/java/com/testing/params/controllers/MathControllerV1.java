@@ -16,22 +16,22 @@ public class MathControllerV1 {
     private MathServiceImpl mathServiceImpl;
 
     @GetMapping("/sum/{a}/{b}")
-    public ResponseEntity<Integer> sum(@PathVariable(value = "a") int a, @PathVariable(value = "b") int b){
+    public ResponseEntity<Integer> sum(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
         return ResponseEntity.ok().body(mathServiceImpl.sum(a,b));
     }
 
     @GetMapping("/subtraction/{a}/{b}")
-    public ResponseEntity<Integer> subtraction(@PathVariable(value = "a") int a, @PathVariable(value = "b") int b){
+    public ResponseEntity<Integer> subtraction(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
         return ResponseEntity.ok().body(mathServiceImpl.subtract(a,b));
     }
 
     @GetMapping("/multiplication/{a}/{b}")
-    public ResponseEntity<Integer> multiply(@PathVariable(value = "a") int a, @PathVariable(value = "b") int b){
+    public ResponseEntity<Integer> multiply(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
         return ResponseEntity.ok().body(mathServiceImpl.multiply(a,b));
     }
 
     @GetMapping("/division/{a}/{b}")
-    public ResponseEntity<Double> divide(@PathVariable(value = "a") double a, @PathVariable(value = "b") double b){
+    public ResponseEntity<Double> divide(@PathVariable(value = "a") String a, @PathVariable(value = "b") String b){
         return ResponseEntity.ok().body(mathServiceImpl.divide(a,b));
     }
 

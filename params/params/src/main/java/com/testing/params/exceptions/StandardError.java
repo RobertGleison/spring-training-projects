@@ -2,18 +2,19 @@ package com.testing.params.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class ErrorModel {
+public class StandardError implements Serializable {
     private Instant timeStamp;
-    private HttpStatus status;
+    private String status;
     private String message;
     private String error;
 
-    public ErrorModel() {
+    public StandardError() {
     }
 
-    public ErrorModel(Instant timeStamp, HttpStatus status, String message, String error) {
+    public StandardError(Instant timeStamp, String status, String message, String error) {
         this.timeStamp = timeStamp;
         this.status = status;
         this.message = message;
@@ -28,11 +29,11 @@ public class ErrorModel {
         this.timeStamp = timeStamp;
     }
 
-    public HttpStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
