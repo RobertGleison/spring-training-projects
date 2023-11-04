@@ -1,7 +1,7 @@
 package crud.application.controllers;
 
 import crud.application.entities.Product;
-import crud.application.services.ProductService;
+import crud.application.services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private ProductServiceImpl service;
 
     @GetMapping
     public ResponseEntity<List<Product>> findAllProducts(){

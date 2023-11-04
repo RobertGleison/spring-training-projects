@@ -1,5 +1,6 @@
 package crud.application.entities.user;
 
+import crud.application.controllers.dto.UserRequestDTO;
 import crud.application.enums.UserRole;
 import jakarta.persistence.*;
 
@@ -24,6 +25,14 @@ public class User {
     public User() {
     }
 
+    public User(UserRequestDTO userDto) {
+        this.id = userDto.id();
+        this.name = userDto.name();
+        this.email = userDto.email();
+        this.phone = userDto.phone();
+        this.password = userDto.password();
+    }
+
     public User(Integer id, String name, String email, String phone, String password){ //UserRole role) {
         this.id = id;
         this.name = name;
@@ -38,8 +47,9 @@ public class User {
         this.email = email;
         this.password = password;
 //        this.role = role;
-
     }
+
+
 
     public Integer getId() {
         return id;

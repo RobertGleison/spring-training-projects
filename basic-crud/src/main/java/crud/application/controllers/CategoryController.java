@@ -1,7 +1,7 @@
 package crud.application.controllers;
 
 import crud.application.entities.Category;
-import crud.application.services.CategoryService;
+import crud.application.services.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryService service;
+    private CategoryServiceImpl service;
 
     @GetMapping
     public ResponseEntity<List<Category>> findAllCategories(){

@@ -1,7 +1,9 @@
 package crud.application.controllers;
 
+import crud.application.controllers.dto.UserRequestDTO;
+import crud.application.controllers.dto.UserResponseDTO;
 import crud.application.entities.user.User;
-import crud.application.services.UserService;
+import crud.application.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +16,15 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 public class UserController {
     @Autowired
-    private UserService service;
+    private UserServiceImpl service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id){
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Integer id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers(){
         return ResponseEntity.ok().body(service.findAll());
     }
 
@@ -37,14 +39,15 @@ public class UserController {
         User user2 = service.update(user,id);
         return ResponseEntity.ok(user2);
     }
-
+//Returning an ResponseDTO for security of information
     @PostMapping
-    public ResponseEntity<User> insertUser(@RequestBody User user){
-        user = service.insert(user);
+    public ResponseEntity<UserResponseDTO> insertUser(@RequestBody UserRequestDTO userDto){
+        User user = service.insert(userDto);
+        UserResponseDTO userResponseDto = new UserResponseDTO(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("{/id}")
                 .buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(user);
+        return ResponseEntity.created(uri).body(userResponseDto);
     }
 
 
