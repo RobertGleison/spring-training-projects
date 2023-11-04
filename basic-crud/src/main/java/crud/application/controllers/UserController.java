@@ -35,10 +35,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id){
-        User user2 = service.update(user,id);
-        return ResponseEntity.ok(user2);
+    public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO userRequestDTO, @PathVariable Integer id){
+        UserResponseDTO userResponseDTO = service.update(userRequestDTO,id);
+        return ResponseEntity.ok(userResponseDTO);
     }
+
 //Returning an ResponseDTO for security of information
     @PostMapping
     public ResponseEntity<UserResponseDTO> insertUser(@RequestBody UserRequestDTO userDto){

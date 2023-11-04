@@ -10,6 +10,6 @@ public interface UserService {
      List<UserResponseDTO> findAll();
      UserResponseDTO findById(Integer id);
      void deleteById(Integer id);
-     UserRequestDTO insert(User user);
-     UserRequestDTO update(UserRequestDTO user, Integer id);
+     User insert(UserRequestDTO userRequestDTO);
+     UserResponseDTO update(UserRequestDTO userResponseDTO, Integer id);
 }

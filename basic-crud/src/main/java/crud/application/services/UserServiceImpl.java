@@ -40,26 +40,29 @@ public class UserServiceImpl implements UserService { //implements UserDetailsSe
 
     public User insert(UserRequestDTO userDto) {
         User user = new User(userDto);
+        UserResponseDTO userResponseDTO = new UserResponseDTO(user);
         return repository.save(user);
     }
 
-    public User update(User user, Integer id) {
+    public UserResponseDTO update(UserRequestDTO userRequestDTO, Integer id) {
         try {
+            User newUserData = new User(userRequestDTO);
             User oldUser = repository.getReferenceById(id);
-            updateData(oldUser, user);
-            return repository.save(oldUser);
+            updateData(oldUser, newUserData);
+            repository.save(oldUser);
+            return new UserResponseDTO(oldUser);
+
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    private void updateData(UserResponseDTO oldUser, UserRequestDTO newUser) {
+    private void updateData(User oldUser, User newUser) {
         newUser.setName(oldUser.getName());
         newUser.setEmail(oldUser.getEmail());
         newUser.setPassword(oldUser.getPassword());
         newUser.setPhone(oldUser.getPhone());
     }
-
 
     public UserResponseDTO convertUserToUserResponseDTO(User user){
         UserResponseDTO userDto = new UserResponseDTO(
