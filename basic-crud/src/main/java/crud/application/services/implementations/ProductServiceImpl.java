@@ -1,8 +1,9 @@
-package crud.application.services;
+package crud.application.services.implementations;
 
 import crud.application.entities.Product;
 import crud.application.repositories.ProductRepository;
-import crud.application.services.exceptions.ResourceNotFoundException;
+import crud.application.exceptions.ResourceNotFoundException;
+import crud.application.services.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository repository;

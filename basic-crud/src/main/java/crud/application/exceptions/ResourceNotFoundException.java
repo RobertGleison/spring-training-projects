@@ -1,4 +1,4 @@
-package crud.application.services.exceptions;
+package crud.application.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(Integer id){

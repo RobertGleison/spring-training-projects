@@ -1,11 +1,11 @@
-package crud.application.entities.user;
+package crud.application.entities;
 
-import crud.application.controllers.dto.UserRequestDTO;
-import crud.application.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import crud.application.resources.dtosV1.UserRequestDtoV1;
 import jakarta.persistence.*;
 
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,19 +13,20 @@ import java.util.Objects;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String email;
     private String phone;
     private String password;
-//    @Enumerated(EnumType.STRING)
-//    private UserRole role;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
 
-    public User(UserRequestDTO userDto) {
+    public User(UserRequestDtoV1 userDto) {
         this.id = userDto.id();
         this.name = userDto.name();
         this.email = userDto.email();
@@ -39,17 +40,15 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
-//        this.role = role;
+        //this.role = role;
     }
 
     public User(String name, String email, String password){ //UserRole role) {
         this.name = name;
         this.email = email;
         this.password = password;
-//        this.role = role;
+        //this.role = role;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -91,47 +90,9 @@ public class User {
         this.password = password;
     }
 
-//    public UserRole getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(UserRole role) {
-//        this.role = role;
-//    }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        if (this.role == UserRole.ADMIN){
-//            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-//        }
-//        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-//    }
-
-//    @Override
-//    public String getUsername() {
-//        return email;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
-
+    public List<Order> getOrders() {
+        return orders;
+    }
 
     @Override
     public boolean equals(Object o) {

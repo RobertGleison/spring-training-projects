@@ -1,7 +1,6 @@
 package crud.application.services;
 
 import crud.application.entities.Product;
-
 import java.util.List;
 
 public interface ProductService {

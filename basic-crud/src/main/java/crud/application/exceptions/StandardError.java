@@ -1,4 +1,4 @@
-package crud.application.controllers.exceptions;
+package crud.application.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

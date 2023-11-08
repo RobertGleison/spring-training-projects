@@ -1,6 +1,5 @@
-package crud.application.controllers.exceptions;
+package crud.application.exceptions;
 
-import crud.application.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.Instant;
 
 @ControllerAdvice
-public class ControllerExceptionHandler {
+public class ExceptionHandlerCentral {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> notFoundResource(ResourceNotFoundException e, HttpServletRequest request){

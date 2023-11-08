@@ -1,20 +1,17 @@
-package crud.application.controllers;
+package crud.application.resources.controllers;
 
 import crud.application.entities.Product;
-import crud.application.services.ProductServiceImpl;
+import crud.application.services.implementations.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/api/v1/products")
-public class ProductController {
+public class ProductControllerV1 {
 
     @Autowired
     private ProductServiceImpl service;

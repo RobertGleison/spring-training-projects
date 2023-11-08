@@ -2,20 +2,27 @@ package crud.application.entities;
 
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name="products")
-public class Product implements Serializable {
+public class Product{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
     private Double price;
+    @ManyToMany
+    @JoinTable(
+            name = "product_category",
+            joinColumns =@JoinColumn(name = "products_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+    private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> orders = new HashSet<>();
 
     public Product() {
     }
@@ -57,6 +64,22 @@ public class Product implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Set<OrderItem> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderItem> orders) {
+        this.orders = orders;
     }
 
     @Override
