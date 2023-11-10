@@ -34,7 +34,7 @@ public class User {
         this.password = userDto.password();
     }
 
-    public User(Integer id, String name, String email, String phone, String password){ //UserRole role) {
+    public User(Integer id, String name, String email, String phone, String password) { //UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -43,7 +43,7 @@ public class User {
         //this.role = role;
     }
 
-    public User(String name, String email, String password){ //UserRole role) {
+    public User(String name, String email, String password) { //UserRole role) {
         this.name = name;
         this.email = email;
         this.password = password;

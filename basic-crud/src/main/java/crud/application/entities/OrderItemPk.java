@@ -11,10 +11,10 @@ import java.util.Objects;
 public class OrderItemPk implements Serializable {
     private static final long serialVersionUID = 1L;
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orders_id")
     private Order order;
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "products_id")
     private Product product;
 
     public Order getOrder() {

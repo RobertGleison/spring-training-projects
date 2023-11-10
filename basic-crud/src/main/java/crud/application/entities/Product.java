@@ -3,6 +3,7 @@ package crud.application.entities;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Entity
