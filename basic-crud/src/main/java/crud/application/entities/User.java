@@ -3,6 +3,10 @@ package crud.application.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import crud.application.resources.dtosV1.UserRequestDtoV1;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 import java.util.ArrayList;
@@ -15,9 +19,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
     private String name;
+    @NotBlank
+    @Email
     private String email;
+    //@TODO Implement regex to accept brazilian numbers and portuguese numbers
     private String phone;
+    @NotBlank
+    @NotNull
+    //@TODO implement validation in password to security and do not persist the flat password into database
     private String password;
     @JsonIgnore
     @OneToMany(mappedBy = "user")

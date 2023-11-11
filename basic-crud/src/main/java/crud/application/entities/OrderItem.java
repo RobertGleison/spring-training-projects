@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
@@ -12,7 +14,10 @@ import java.io.Serializable;
 public class OrderItem implements Serializable {
     @EmbeddedId
     private OrderItemPk id = new OrderItemPk();
+    @NotBlank
     private Integer quantity;
+    @NotBlank
+    //@TODO Implement in the future, REGEX for this price
     private Double price;
 
     public OrderItem(Order order, Product product, Integer quantity, Double price) {

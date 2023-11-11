@@ -2,6 +2,8 @@ package crud.application.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -11,6 +13,8 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
+    @Column(unique = true)
     private String name;
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
