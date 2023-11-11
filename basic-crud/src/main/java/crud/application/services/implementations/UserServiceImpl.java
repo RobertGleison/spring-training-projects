@@ -19,10 +19,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
+    @Override
     public List<UserResponseDtoV1> findAll() {
         return repository.findAll().stream().map(UserResponseDtoV1::new).collect(Collectors.toList());
     }
 
+    @Override
     public UserResponseDtoV1 findById(Integer id) {
         User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return new UserResponseDtoV1(user);
@@ -30,18 +32,21 @@ public class UserServiceImpl implements UserService {
         //return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    @Override
     public void deleteById(Integer id) {
         Optional<User> user = repository.findById(id);
-        if (user == null) throw new ResourceNotFoundException(id);
-        else repository.deleteById(id);
+        if(user.isPresent()) repository.deleteById(id);
+        else throw new ResourceNotFoundException(id);
     }
 
+    @Override
     public User insert(UserRequestDtoV1 userDto) {
         User user = new User(userDto);
         UserResponseDtoV1 userResponseDtoV1 = new UserResponseDtoV1(user);
         return repository.save(user);
     }
 
+    @Override
     public UserResponseDtoV1 update(UserRequestDtoV1 userRequestDtoV1, Integer id) {
         try {
             User newUserData = new User(userRequestDtoV1);
@@ -63,12 +68,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserResponseDtoV1 convertUserToUserResponseDTO(User user) {
-        UserResponseDtoV1 userDto = new UserResponseDtoV1(
+        return new UserResponseDtoV1(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getPhone());
-        return userDto;
 
     }
 }

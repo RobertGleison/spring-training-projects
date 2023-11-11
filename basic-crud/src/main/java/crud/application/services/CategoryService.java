@@ -1,9 +1,14 @@
 package crud.application.services;
 
 import crud.application.entities.Category;
+import crud.application.resources.dtosV1.CategoryDtoV1;
+
 import java.util.List;
 
 public interface CategoryService {
-    Category findCategoryById(Integer id);
-    List<Category> findAllCategories();
+    CategoryDtoV1 findCategoryById(Integer id);
+    List<CategoryDtoV1> findAllCategories();
+    void deleteCategoryById(Integer id);
+    CategoryDtoV1 update(CategoryDtoV1 categoryDtoV1, Integer id);
+    Category insert(CategoryDtoV1 categoryDtoV1);
 }

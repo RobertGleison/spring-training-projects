@@ -1,13 +1,18 @@
 package crud.application.services;
 
 import crud.application.entities.Product;
+import crud.application.entities.User;
+import crud.application.resources.dtosV1.ProductDtoV1;
+
+import crud.application.resources.dtosV1.UserResponseDtoV1;
+
 import java.util.List;
 
 public interface ProductService {
-    List<Product> findAll();
-    Product findById(Integer id);
+    List<ProductDtoV1> findAll();
+    ProductDtoV1 findById(Integer id);
     void deleteById(Integer id);
-    Product insert(Product product);
-    Product update(Integer id, Product product);
+    Product insert(ProductDtoV1 productDtoV1);
+    ProductDtoV1 update(ProductDtoV1 productDtoV1, Integer id);
 
 }

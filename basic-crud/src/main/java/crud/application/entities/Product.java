@@ -1,6 +1,7 @@
 package crud.application.entities;
 
 
+import crud.application.resources.dtosV1.ProductDtoV1;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +11,8 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 @Entity
-@Table(name="products")
-public class Product{
+@Table(name = "products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,7 +24,7 @@ public class Product{
     @ManyToMany
     @JoinTable(
             name = "product_category",
-            joinColumns =@JoinColumn(name = "products_id"),
+            joinColumns = @JoinColumn(name = "products_id"),
             inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private Set<Category> categories = new HashSet<>();
 
@@ -31,6 +32,13 @@ public class Product{
     private Set<OrderItem> orders = new HashSet<>();
 
     public Product() {
+    }
+
+    public Product(ProductDtoV1 productDtoV1) {
+        this.id = productDtoV1.id();
+        this.name = productDtoV1.name();
+        this.description = productDtoV1.description();
+        this.price = productDtoV1.price();
     }
 
     public Product(Integer id, String name, String description, Double price) {
