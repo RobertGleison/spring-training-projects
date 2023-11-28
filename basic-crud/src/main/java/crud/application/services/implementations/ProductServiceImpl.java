@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
         oldProduct.setPrice(productDtoV1.price());
     }
 
-    private ProductDtoV1 convertProductToProductDtoV1(Product product) {
+    public ProductDtoV1 convertProductToProductDtoV1(Product product) {
         return new ProductDtoV1(
                 product.getId(),
                 product.getName(),

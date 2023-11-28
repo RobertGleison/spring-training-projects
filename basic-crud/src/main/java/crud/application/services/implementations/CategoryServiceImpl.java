@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -17,19 +18,21 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository repository;
 
     @Override
-    public Category findCategoryById(Integer id){
+    public CategoryDtoV1 findCategoryById(Integer id){
         Optional<Category> category = repository.findById(id);
-        return category.orElseThrow(() -> new ResourceNotFoundException(id));
+        return convertCategoryToCategoryDtoV1(category.orElseThrow(() -> new ResourceNotFoundException(id)));
     }
 
     @Override
-    public List<Category> findAllCategories(){
-        return repository.findAll();
+    public List<CategoryDtoV1> findAllCategories(){
+        return repository.findAll().stream().map(this::convertCategoryToCategoryDtoV1).collect(Collectors.toList());
     }
 
     @Override
     public void deleteCategoryById(Integer id) {
-
+        Optional<Category> category = repository.findById(id);
+        if(category.isPresent()) repository.deleteById(id);
+        else throw new ResourceNotFoundException(id);
     }
 
     @Override
@@ -42,5 +45,10 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
-
+    private CategoryDtoV1 convertCategoryToCategoryDtoV1(Category category){
+         return new CategoryDtoV1(
+                category.getId(),
+                category.getName()
+        );
+    }
 }

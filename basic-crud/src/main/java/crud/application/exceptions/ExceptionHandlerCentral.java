@@ -10,7 +10,7 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ExceptionHandlerCentral {
-
+//@TODO Catch Validation errors
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> notFoundResource(ResourceNotFoundException e, HttpServletRequest request){
         String error = "Resource not found";

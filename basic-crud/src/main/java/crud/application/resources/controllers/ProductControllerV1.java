@@ -1,6 +1,7 @@
 package crud.application.resources.controllers;
 
 import crud.application.entities.Product;
+import crud.application.resources.dtosV1.ProductDtoV1;
 import crud.application.services.implementations.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,14 @@ public class ProductControllerV1 {
     private ProductServiceImpl service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAllProducts(){
-        List<Product> products = service.findAll();
+    public ResponseEntity<List<ProductDtoV1>> findAllProducts(){
+        List<ProductDtoV1> products = service.findAll();
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findProductById(@PathVariable Integer id){
-       Product product = service.findById(id);
+    public ResponseEntity<ProductDtoV1> findProductById(@PathVariable Integer id){
+       ProductDtoV1 product = service.findById(id);
        return ResponseEntity.ok(product);
     }
 
@@ -35,18 +36,17 @@ public class ProductControllerV1 {
     }
 
     @PostMapping
-    public ResponseEntity<Product> insertProduct(@RequestBody Product product){
-        product = service.insert(product);
+    public ResponseEntity<ProductDtoV1> insertProduct(@RequestBody ProductDtoV1 productDtoV1){
+        Product product = service.insert(productDtoV1);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(product.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(product);
+        return ResponseEntity.created(uri).body(service.convertProductToProductDtoV1(product));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product){
-        product = service.update(id, product);
-        return ResponseEntity.ok().body(product);
+    public ResponseEntity<ProductDtoV1> updateProduct(@PathVariable Integer id, @RequestBody ProductDtoV1 productDtoV1){
+        return ResponseEntity.ok().body(service.update(productDtoV1,id));
     }
 
 }

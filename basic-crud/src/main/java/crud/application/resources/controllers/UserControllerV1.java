@@ -40,7 +40,7 @@ public class UserControllerV1 {
         return ResponseEntity.ok(userResponseDtoV1);
     }
 
-    //Returning an ResponseDTO for security of information
+
     @PostMapping
     public ResponseEntity<UserResponseDtoV1> insertUser(@RequestBody UserRequestDtoV1 userDto) {
         User user = service.insert(userDto);
