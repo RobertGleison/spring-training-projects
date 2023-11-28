@@ -43,12 +43,11 @@ public class UserControllerV1 {
 
     @PostMapping
     public ResponseEntity<UserResponseDtoV1> insertUser(@RequestBody UserRequestDtoV1 userDto) {
-        User user = service.insert(userDto);
-        UserResponseDtoV1 userResponseDtoV1 = new UserResponseDtoV1(user);
+        UserResponseDtoV1 userDtoResponse = service.insert(userDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("{/id}")
-                .buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(userResponseDtoV1);
+                .buildAndExpand(userDtoResponse.id()).toUri();
+        return ResponseEntity.created(uri).body(userDtoResponse);
     }
 
 

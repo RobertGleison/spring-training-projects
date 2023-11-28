@@ -1,6 +1,7 @@
 package crud.application.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import crud.application.resources.dtosV1.CategoryDtoV1;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -23,6 +24,11 @@ public class Category implements Serializable {
     public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Category(CategoryDtoV1 categoryDtoV1) {
+        this.id = categoryDtoV1.id();
+        this.name = categoryDtoV1.name();
     }
 
     public Category() {

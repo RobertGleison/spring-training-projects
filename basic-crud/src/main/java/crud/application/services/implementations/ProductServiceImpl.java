@@ -37,9 +37,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product insert(ProductDtoV1 productDtoV1) {
+    public ProductDtoV1 insert(ProductDtoV1 productDtoV1) {
         Product product = new Product(productDtoV1);
-        return repository.save(product);
+        return convertProductToProductDtoV1(repository.save(product));
     }
 
     @Override

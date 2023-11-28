@@ -37,11 +37,11 @@ public class ProductControllerV1 {
 
     @PostMapping
     public ResponseEntity<ProductDtoV1> insertProduct(@RequestBody ProductDtoV1 productDtoV1){
-        Product product = service.insert(productDtoV1);
+        productDtoV1 = service.insert(productDtoV1);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(product.getId())
+                .path("/{id}").buildAndExpand(productDtoV1.id())
                 .toUri();
-        return ResponseEntity.created(uri).body(service.convertProductToProductDtoV1(product));
+        return ResponseEntity.created(uri).body(productDtoV1);
     }
 
     @PutMapping("/{id}")

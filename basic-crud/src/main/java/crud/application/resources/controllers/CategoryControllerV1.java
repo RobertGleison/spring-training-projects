@@ -7,7 +7,9 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -34,5 +36,16 @@ public class CategoryControllerV1 {
     }
 
     @PostMapping
+    public ResponseEntity<CategoryDtoV1> insertCategory(@RequestBody CategoryDtoV1 categoryDtoV1){
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("{/id}")
+                .buildAndExpand(categoryDtoV1.id()).toUri();
+        return ResponseEntity.created(uri).body(service.insert(categoryDtoV1));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDtoV1> updateCategory(@RequestBody CategoryDtoV1 categoryDtoV1, @PathVariable Integer id){
+        return ResponseEntity.ok().body(service.update(categoryDtoV1, id));
+    }
 
 }

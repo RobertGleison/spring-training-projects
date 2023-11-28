@@ -40,10 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User insert(UserRequestDtoV1 userDto) {
+    public UserResponseDtoV1 insert(UserRequestDtoV1 userDto) {
         User user = new User(userDto);
-        UserResponseDtoV1 userResponseDtoV1 = new UserResponseDtoV1(user);
-        return repository.save(user);
+        return convertUserToUserResponseDTO(repository.save(user));
     }
 
     @Override

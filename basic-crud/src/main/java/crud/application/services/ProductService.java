@@ -12,7 +12,7 @@ public interface ProductService {
     List<ProductDtoV1> findAll();
     ProductDtoV1 findById(Integer id);
     void deleteById(Integer id);
-    Product insert(ProductDtoV1 productDtoV1);
+    ProductDtoV1 insert(ProductDtoV1 productDtoV1);
     ProductDtoV1 update(ProductDtoV1 productDtoV1, Integer id);
 
 }

@@ -10,5 +10,5 @@ public interface CategoryService {
     List<CategoryDtoV1> findAllCategories();
     void deleteCategoryById(Integer id);
     CategoryDtoV1 update(CategoryDtoV1 categoryDtoV1, Integer id);
-    Category insert(CategoryDtoV1 categoryDtoV1);
+    CategoryDtoV1 insert(CategoryDtoV1 categoryDtoV1);
 }
