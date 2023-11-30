@@ -1,10 +1,10 @@
-package crud.application.services.implementations;
+package crud.application.services;
 
 import crud.application.entities.Product;
 import crud.application.repositories.ProductRepository;
 import crud.application.exceptions.ResourceNotFoundException;
 import crud.application.resources.dtosV1.ProductDtoV1;
-import crud.application.services.ProductService;
+import crud.application.services.interfaces.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

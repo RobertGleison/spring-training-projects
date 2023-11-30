@@ -2,8 +2,7 @@ package crud.application.resources.controllers;
 
 import crud.application.resources.dtosV1.UserRequestDtoV1;
 import crud.application.resources.dtosV1.UserResponseDtoV1;
-import crud.application.entities.User;
-import crud.application.services.implementations.UserServiceImpl;
+import crud.application.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

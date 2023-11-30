@@ -1,4 +1,4 @@
-package crud.application.services;
+package crud.application.services.interfaces;
 
 import crud.application.entities.Product;
 import crud.application.entities.User;

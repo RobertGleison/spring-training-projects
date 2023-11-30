@@ -35,10 +35,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer id, Instant orderMoment, Integer status, User user) {
+    public Order(Integer id, Instant orderMoment, OrderStatus status, User user) {
         this.id = id;
         this.orderMoment = orderMoment;
-        this.status = status;
+        this.status = status.getStatus();
         this.user = user;
     }
 

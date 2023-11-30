@@ -1,4 +1,4 @@
-package crud.application.services;
+package crud.application.services.interfaces;
 
 import crud.application.entities.Category;
 import crud.application.resources.dtosV1.CategoryDtoV1;

@@ -1,9 +1,7 @@
 package crud.application.resources.controllers;
 
-import crud.application.entities.Category;
 import crud.application.resources.dtosV1.CategoryDtoV1;
-import crud.application.services.implementations.CategoryServiceImpl;
-import org.apache.coyote.Response;
+import crud.application.services.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +35,12 @@ public class CategoryControllerV1 {
 
     @PostMapping
     public ResponseEntity<CategoryDtoV1> insertCategory(@RequestBody CategoryDtoV1 categoryDtoV1){
+        CategoryDtoV1 result = service.insert(categoryDtoV1);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("{/id}")
-                .buildAndExpand(categoryDtoV1.id()).toUri();
-        return ResponseEntity.created(uri).body(service.insert(categoryDtoV1));
+                .path("/{id}")
+                .buildAndExpand(result.id())
+                .toUri();
+        return ResponseEntity.created(uri).body(result);
     }
 
     @PutMapping("/{id}")

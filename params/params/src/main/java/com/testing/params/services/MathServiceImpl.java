@@ -25,8 +25,6 @@ public class MathServiceImpl {
         }
     }
 
-
-
     public Double subtract(String a, String b) {
         try{
             double op1 = convertToDouble(a);
@@ -38,7 +36,6 @@ public class MathServiceImpl {
 
         }
     }
-
 
     public Double multiply(String a, String b) {
         try{

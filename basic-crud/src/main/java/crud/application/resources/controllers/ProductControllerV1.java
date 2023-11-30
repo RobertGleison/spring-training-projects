@@ -1,8 +1,7 @@
 package crud.application.resources.controllers;
 
-import crud.application.entities.Product;
 import crud.application.resources.dtosV1.ProductDtoV1;
-import crud.application.services.implementations.ProductServiceImpl;
+import crud.application.services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

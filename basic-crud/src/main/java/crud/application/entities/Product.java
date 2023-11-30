@@ -48,6 +48,12 @@ public class Product {
         this.price = price;
     }
 
+    public Product(String name, String description, Double price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }
