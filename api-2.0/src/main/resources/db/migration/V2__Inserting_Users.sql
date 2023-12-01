@@ -1,4 +1,4 @@
-INSERT INTO person (name, age, phone, email)
+INSERT INTO users (name, age, phone, email)
 VALUES
     ('Robert', 22, '123-456-7890', 'robert@example.com'),
     ('Alice', 20, '987-654-3210', 'alice@example.com'),
