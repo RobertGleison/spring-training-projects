@@ -1,10 +1,10 @@
-package com.api.application.services;
+package com.api.services;
 
-import com.api.application.dtos.UserRequestDto;
-import com.api.application.dtos.UserResponseDto;
-import com.api.application.entities.User;
-import com.api.application.exceptions.ResourceNotFoundException;
-import com.api.application.repositories.UserRepository;
+import com.api.dtos.UserRequestDto;
+import com.api.dtos.UserResponseDto;
+import com.api.entities.User;
+import com.api.exceptions.ResourceNotFoundException;
+import com.api.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class UserService {
     }
 
     private UserRequestDto convertUserToRequestDto(User user) {
-        return new UserRequestDto(user.getName(), user.getAge(), user.getPhone(), user.getEmail());
+        return new UserRequestDto(user.getName(), user.getAge(), user.getPhone(), user.getEmail(), user.getPassword());
     }
 
     private UserResponseDto convertUserToResponseDto(User user) {
@@ -61,6 +61,6 @@ public class UserService {
     }
 
     private User convertDtoToUser(UserRequestDto userRequestDto) {
-        return new User(userRequestDto.name(), userRequestDto.age(), userRequestDto.phone(), userRequestDto.email());
+        return new User(userRequestDto.name(), userRequestDto.age(), userRequestDto.phone(), userRequestDto.email(), userRequestDto.password());
     }
 }

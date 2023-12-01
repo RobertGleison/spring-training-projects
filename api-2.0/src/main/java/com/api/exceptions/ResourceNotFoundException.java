@@ -1,4 +1,4 @@
-package com.api.application.exceptions;
+package com.api.exceptions;
 
 import java.io.Serializable;
 

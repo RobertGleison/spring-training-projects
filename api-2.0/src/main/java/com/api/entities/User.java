@@ -1,4 +1,4 @@
-package com.api.application.entities;
+package com.api.entities;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +21,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     public User() {
     }
 
@@ -29,11 +32,12 @@ public class User {
         this.email = email;
     }
 
-    public User(String name, Integer age, String phone, String email) {
+    public User(String name, Integer age, String phone, String email, String password) {
         this.name = name;
         this.age = age;
         this.phone = phone;
         this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -74,6 +78,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

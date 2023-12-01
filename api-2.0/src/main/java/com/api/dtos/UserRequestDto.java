@@ -1,7 +1,6 @@
-package com.api.application.dtos;
-
+package com.api.dtos;
 public record UserRequestDto(String name,
                              Integer age,
                              String phone,
-                             String email) {
-}
+                             String email,
+                             String password){}
