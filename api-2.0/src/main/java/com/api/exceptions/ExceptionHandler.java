@@ -15,4 +15,12 @@ public class ExceptionHandler {
         DefaultErrorMessage response = new DefaultErrorMessage(exception.getMessage(), error, LocalTime.now(),status.value());
         return ResponseEntity.status(status).body(response);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidJwtAuthException.class)
+    public ResponseEntity<DefaultErrorMessage> handeleInvalidJwtAuthException(InvalidJwtAuthException exception){
+        String error = "Invalid Authentication";
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        DefaultErrorMessage response = new DefaultErrorMessage(exception.getMessage(), error, LocalTime.now(),status.value());
+        return ResponseEntity.status(status).body(response);
+    }
 }

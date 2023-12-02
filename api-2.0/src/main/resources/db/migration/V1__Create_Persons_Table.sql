@@ -1,7 +1,6 @@
-CREATE TABLE users (
+CREATE TABLE persons (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     age INTEGER,
     phone VARCHAR(255),
-    email VARCHAR(255) NOT NULL UNIQUE
-);
+    email VARCHAR(255) NOT NULL UNIQUE);

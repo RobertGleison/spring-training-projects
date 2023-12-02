@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserControllerV1 {
 
+    private static final Logger logger = Logger.getLogger(UserControllerV1.class.getName());
     @Autowired
     private UserServiceImpl service;
 
@@ -24,6 +26,7 @@ public class UserControllerV1 {
 
     @GetMapping
     public ResponseEntity<List<UserResponseDtoV1>> getAllUsers() {
+        logger.info("I'm in the getAllUsers");
         return ResponseEntity.ok().body(service.findAll());
     }
 
@@ -48,6 +51,4 @@ public class UserControllerV1 {
                 .buildAndExpand(userDtoResponse.id()).toUri();
         return ResponseEntity.created(uri).body(userDtoResponse);
     }
-
-
 }

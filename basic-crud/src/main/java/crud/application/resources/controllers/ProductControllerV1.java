@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductControllerV1 {
+
+    private static final Logger logger = Logger.getLogger(ProductDtoV1.class.getName());
 
     @Autowired
     private ProductServiceImpl service;
@@ -19,12 +22,14 @@ public class ProductControllerV1 {
     @GetMapping
     public ResponseEntity<List<ProductDtoV1>> findAllProducts(){
         List<ProductDtoV1> products = service.findAll();
+        logger.info("i'm in findAll");
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDtoV1> findProductById(@PathVariable Integer id){
        ProductDtoV1 product = service.findById(id);
+       logger.info("i'm in getById");
        return ResponseEntity.ok(product);
     }
 
