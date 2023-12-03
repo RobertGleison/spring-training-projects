@@ -18,7 +18,8 @@ public class OpenApiConfig {
                 .version("v1")
                 .description("Simple API")
                 .termsOfService("www.google.com")
-                .license(new License().name("Apache 2.0")
-                        .url("Alguma URL")));
+                .license(new License()
+                        .name("Apache 2.0")
+                        .url("https://www.apache.org/licenses/LICENSE-2.0")));
     }
 }
