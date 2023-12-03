@@ -64,7 +64,7 @@ public class PersonController {
     public ResponseEntity<PersonResponseDto> createPerson(@RequestBody PersonRequestDto personRequestDto) {
         PersonResponseDto createdPerson = personService.createPerson(personRequestDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{userId}")
+                .path("/{personId}")
                 .buildAndExpand(createdPerson.id())
                 .toUri();
         return ResponseEntity.created(uri).body(createdPerson);

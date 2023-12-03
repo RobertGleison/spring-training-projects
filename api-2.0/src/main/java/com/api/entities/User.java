@@ -18,6 +18,8 @@ public class User implements UserDetails {
     private Integer id;
     private String login;
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 255)
     private UserRole role;
 
     public User() {
@@ -25,6 +27,12 @@ public class User implements UserDetails {
 
     public User(Integer id, String login, String password, UserRole role) {
         this.id = id;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
