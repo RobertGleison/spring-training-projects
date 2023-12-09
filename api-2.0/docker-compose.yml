@@ -11,9 +11,9 @@ services:
       MYSQL_PASSWORD: robert
       MYSQL_DATABASE: test1
     ports:
-      - 3308:3308
+      - 3309:3308
     expose:
-      - 3308
+      - 3309
     networks:
       - my-network
   test1:
@@ -22,12 +22,12 @@ services:
     build: .
     working_dir: /api-2.0
     environment:
-      SPRING.DATASOURCE.URL: jdbc:mysql://db:3308/test1
+      SPRING.DATASOURCE.URL: jdbc:mysql://db:3309/test1
       SPRING.DATASOURCE.USERNAME: robert
       SPRING.DATASOURCE.PASSWORD: robert
       TZ: Europe/Lisbon
     ports:
-      - 8081:80
+      - 8081:8082
     command: mvn spring-boot:run
     depends_on:
       - db

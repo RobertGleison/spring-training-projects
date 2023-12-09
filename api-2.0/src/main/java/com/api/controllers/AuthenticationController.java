@@ -1,5 +1,11 @@
-package com.api.controllers;
-
+package com.api.controllers;//package com.api.controllers;
+//
+//import com.api.dtos.AuthenticationDto;
+//import com.api.dtos.LoginResponseDto;
+//import com.api.dtos.RegisterDto;
+//import com.api.entities.User;
+//import com.api.repositories.UserRepository;
+//import com.api.securityInfrastructure.TokenService;
 import com.api.dtos.AuthenticationDto;
 import com.api.dtos.LoginResponseDto;
 import com.api.dtos.RegisterDto;
@@ -37,10 +43,11 @@ public class AuthenticationController {
     public ResponseEntity login(@RequestBody AuthenticationDto data) {
         logger.info("Enter the login controller");
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+        logger.info("Created usernamePassword");
         var auth = this.authenticationManager.authenticate(usernamePassword);
-
+        logger.info("Created auth");
         var token = tokenService.generateToken((User) auth.getPrincipal());
-        logger.info("Leaving login controller");
+        logger.info("Created token");
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
