@@ -1,12 +1,15 @@
 package com.rinha.rinha_backend.person;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="tb_person")
@@ -14,8 +17,13 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
+    @NotNull
+    @NotBlank
+
     private String nickname;
+    @NotNull
+    @NotBlank
     private String name;
     private LocalDate birthdate;
     private List<String> stacks = new ArrayList<>();
