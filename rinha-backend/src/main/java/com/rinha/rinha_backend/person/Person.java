@@ -5,11 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name="tb_person")
@@ -25,17 +21,25 @@ public class Person implements Serializable {
     @NotNull
     @NotBlank
     private String name;
-    private LocalDate birthdate;
-    private List<String> stacks = new ArrayList<>();
+    private String birthdate;
+    private Set<String> stack = new HashSet<>();
 
     public Person() {
     }
 
-    public Person(String nickname, String name, LocalDate birthdate, List<String> stack) {
+    public Person(String nickname, String name, String birthdate, Set<String> stack) {
         this.nickname = nickname;
         this.name = name;
         this.birthdate = birthdate;
-        this.stacks = stack;
+        this.stack = stack;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getNickname() {
@@ -54,16 +58,20 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public Set<String> getStack() {
+        return stack;
     }
 
-    public List<String> getStacks() {
-        return stacks;
+    public void addStack(String stack){
+        this.stack.add(stack);
+    }
+
+    public void removeStack(String stack){
+        this.stack.remove(stack);
     }
 
     @Override
@@ -86,7 +94,7 @@ public class Person implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
                 ", birthdate=" + birthdate +
-                ", stacks=" + stacks +
+                ", stacks=" + stack +
                 '}';
     }
 }

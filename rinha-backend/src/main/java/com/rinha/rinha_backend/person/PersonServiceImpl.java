@@ -1,16 +1,25 @@
 package com.rinha.rinha_backend.person;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
-public class PersonServiceImpl extends PersonService{
+public class PersonServiceImpl implements PersonService {
+
+    @Autowired
+    private PersonRepository repository;
+
     @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
-        return null;
+        Person person = convertPersonRequestDtoToPerson(personRequestDto);
+        return new PersonResponseDto(repository.save(person));
     }
 
     @Override
     public PersonResponseDto getPersonById(UUID id) {
-        return null;
+        return new PersonResponseDto(repository.findById(id).orElseThrow(() -> new NoSuchElementException("This person is not registered")));
     }
 
     @Override
@@ -19,7 +28,16 @@ public class PersonServiceImpl extends PersonService{
     }
 
     @Override
-    public int registeredPersonsCounter() {
-        return 0;
+    public Long registeredPersonsCounter() {
+        return repository.count();
+
+    }
+
+    private Person convertPersonRequestDtoToPerson(PersonRequestDto personRequestDto) {
+        return new Person(
+                personRequestDto.nickname(),
+                personRequestDto.name(),
+                personRequestDto.birthdate(),
+                personRequestDto.stack());
     }
 }

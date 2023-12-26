@@ -1,7 +1,8 @@
 package com.rinha.rinha_backend.person;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-public record PersonRequestDto(UUID id, String nickname, String name, String birthdate, List<String> stack) {
+public record PersonRequestDto(String nickname, String name, String birthdate, Set<String> stack) {
 }

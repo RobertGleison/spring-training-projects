@@ -6,5 +6,5 @@ public interface PersonService {
     PersonResponseDto createPerson(PersonRequestDto personRequestDto);
     PersonResponseDto getPersonById(UUID id);
     PersonResponseDto searchPersonByTerm(String searchTerm);
-    int registeredPersonsCounter();
+    Long registeredPersonsCounter();
 }
