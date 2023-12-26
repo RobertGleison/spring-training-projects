@@ -1,10 +1,14 @@
 package com.rinha.rinha_backend.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/pessoas")
@@ -13,10 +17,16 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping(value="/{id}")
-    public Person getPerson(@PathVariable Long id){
-        Person person = service.findById(id);
-        return person;
+
+    @GetMapping
+    public ResponseEntity<List<PersonResponseDto>> getAllPerson() {
+        return ResponseEntity.ok().body(service.getAllPersons());
+    }
+
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PersonResponseDto> getPerson(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(service.getPersonById(id));
     }
 
 //    @GetMapping(value="/pessoas?t=[:termo da busca]")
@@ -24,12 +34,16 @@ public class PersonController {
 //
 //    }
 
-    @GetMapping(value="/contagem-pessoas")
-    public Long getPersonsCount(){
-        Long count = service.getPersonsCount();
-        return count;
+    @GetMapping(value = "/contagem-pessoas")
+    public ResponseEntity<Long> getPersonsCount() {
+        return ResponseEntity.ok().body(service.registeredPersonsCounter());
     }
 
-
-
+    @PostMapping
+    public ResponseEntity<PersonResponseDto> createPerson(@RequestBody PersonRequestDto personRequestDto){
+        PersonResponseDto personResponseDto = service.createPerson(personRequestDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/" + personResponseDto.id()).build().toUri();
+        return ResponseEntity.created(uri).body(personResponseDto);
+    }
 }

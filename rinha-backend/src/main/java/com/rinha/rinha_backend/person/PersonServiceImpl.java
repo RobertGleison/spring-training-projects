@@ -2,10 +2,14 @@ package com.rinha.rinha_backend.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+@Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
@@ -14,12 +18,17 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
         Person person = convertPersonRequestDtoToPerson(personRequestDto);
-        return new PersonResponseDto(repository.save(person));
+        return convertPersonToResponseDto(repository.save(person));
     }
 
     @Override
     public PersonResponseDto getPersonById(UUID id) {
-        return new PersonResponseDto(repository.findById(id).orElseThrow(() -> new NoSuchElementException("This person is not registered")));
+        return convertPersonToResponseDto(repository.findById(id).orElseThrow(() -> new NoSuchElementException("This person is not registered")));
+    }
+
+    @Override
+    public List<PersonResponseDto> getAllPersons() {
+        return repository.findAll().stream().map(this::convertPersonToResponseDto).collect(Collectors.toList());
     }
 
     @Override
@@ -39,5 +48,14 @@ public class PersonServiceImpl implements PersonService {
                 personRequestDto.name(),
                 personRequestDto.birthdate(),
                 personRequestDto.stack());
+    }
+
+    private PersonResponseDto convertPersonToResponseDto(Person person) {
+        return new PersonResponseDto(
+                person.getId(),
+                person.getNickname(),
+                person.getName(),
+                person.getBirthdate(),
+                person.getStack());
     }
 }
