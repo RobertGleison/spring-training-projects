@@ -3,6 +3,8 @@ package com.rinha.rinha_backend.person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.io.Serializable;
 import java.util.*;
@@ -15,11 +17,14 @@ public class Person implements Serializable {
     private UUID id;
     @NotNull
     @NotBlank
-
+    @Length(max=32)
     private String nickname;
     @NotNull
     @NotBlank
+    @Length(max=100)
     private String name;
+    @NotNull
+    @NotBlank
     private String birthdate;
     private Set<String> stack = new HashSet<>();
 
@@ -28,7 +33,8 @@ public class Person implements Serializable {
 
     public Person(String nickname, String name, String birthdate, Set<String> stack) {
         this.nickname = nickname;
-        this.name = name;
+        if(!isNumeric(name)) this.name = name;
+        else throw new IllegalArgumentException("Name can not be numbers");
         this.birthdate = birthdate;
         this.stack = stack;
     }
@@ -66,11 +72,13 @@ public class Person implements Serializable {
     }
 
     public void addStack(String stack){
+        if(isNumeric(stack)) throw new IllegalArgumentException("Stacks can not be numbers");
+        if(stack.length() > 32) throw new IllegalArgumentException("Stacks must have 32 max length");
         this.stack.add(stack);
     }
 
     public void removeStack(String stack){
-        this.stack.remove(stack);
+        if(this.stack.contains(stack)) this.stack.remove(stack);
     }
 
     @Override
@@ -95,5 +103,16 @@ public class Person implements Serializable {
                 ", birthdate=" + birthdate +
                 ", stacks=" + stack +
                 '}';
+    }
+
+    private boolean isNumeric(String input) {
+        try{
+            Integer.parseInt(input);
+            Double.parseDouble(input);
+            return true;
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
     }
 }

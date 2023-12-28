@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
+        Optional<Person> existingPerson = repository.findByNickname(personRequestDto.nickname());
+        if(existingPerson.isPresent()) throw new RuntimeException("This person is already registered");
         Person person = convertPersonRequestDtoToPerson(personRequestDto);
         return convertPersonToResponseDto(repository.save(person));
     }
@@ -32,8 +35,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonResponseDto searchPersonByTerm(String searchTerm) {
-        return null;
+    public List<PersonResponseDto> searchPersonByTerm(String searchTerm) {
+        return repository.findByTerm(searchTerm).stream().map(this::convertPersonToResponseDto).collect(Collectors.toList());
     }
 
     @Override

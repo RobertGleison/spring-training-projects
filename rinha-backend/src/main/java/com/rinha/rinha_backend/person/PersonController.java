@@ -1,5 +1,6 @@
 package com.rinha.rinha_backend.person;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -19,20 +20,15 @@ public class PersonController {
 
 
     @GetMapping
-    public ResponseEntity<List<PersonResponseDto>> getAllPerson() {
+    public ResponseEntity<List<PersonResponseDto>> getAllPerson(@RequestParam(name = "t", required = false) String searchTerm) {
+        if (searchTerm != null && !searchTerm.isEmpty()) return ResponseEntity.ok().body(service.searchPersonByTerm(searchTerm));
         return ResponseEntity.ok().body(service.getAllPersons());
     }
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<PersonResponseDto> getPerson(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getPersonById(id));
     }
-
-//    @GetMapping(value="/pessoas?t=[:termo da busca]")
-//    public Person getPersonbyQuery(@PathVariable String query){
-//
-//    }
 
     @GetMapping(value = "/contagem-pessoas")
     public ResponseEntity<Long> getPersonsCount() {
@@ -40,7 +36,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonResponseDto> createPerson(@RequestBody PersonRequestDto personRequestDto){
+    public ResponseEntity<PersonResponseDto> createPerson(@Valid @RequestBody PersonRequestDto personRequestDto){
         PersonResponseDto personResponseDto = service.createPerson(personRequestDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/" + personResponseDto.id()).build().toUri();

@@ -7,6 +7,6 @@ public interface PersonService {
     PersonResponseDto createPerson(PersonRequestDto personRequestDto);
     PersonResponseDto getPersonById(UUID id);
     List<PersonResponseDto> getAllPersons();
-    PersonResponseDto searchPersonByTerm(String searchTerm);
+    List<PersonResponseDto> searchPersonByTerm(String searchTerm);
     Long registeredPersonsCounter();
 }
