@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public record PersonRequestDto(@NotNull @NotBlank String nickname,@NotNull @NotBlank String name, String birthdate, Set<String> stack) {
+public record PersonRequestDto(@NotNull(message = "The nickname can not be null") @NotBlank String nickname,@NotNull(message = "The name can not be null") @NotBlank String name, String birthdate, Set<String> stack) {
 }

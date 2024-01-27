@@ -3,6 +3,7 @@ package com.rinha.rinha_backend.person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,6 +21,9 @@ public class PersonServiceImpl implements PersonService {
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
         Optional<Person> existingPerson = repository.findByNickname(personRequestDto.nickname());
         if(existingPerson.isPresent()) throw new RuntimeException("This person is already registered");
+//        if(personRequestDto.name()== null) throw new RuntimeException("The name can not be null");
+//        if(personRequestDto.nickname() == null) throw new RuntimeException("The name can not be null");
+//        if(personRequestDto.birthdate() == null) throw new RuntimeException("The birthdate can not be null");
         Person person = convertPersonRequestDtoToPerson(personRequestDto);
         return convertPersonToResponseDto(repository.save(person));
     }

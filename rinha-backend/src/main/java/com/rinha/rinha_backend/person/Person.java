@@ -3,6 +3,7 @@ package com.rinha.rinha_backend.person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -26,6 +27,7 @@ public class Person implements Serializable {
     @NotNull
     @NotBlank
     private String birthdate;
+//    @Pattern(regexp = "[a-zA-Z]+")
     private Set<String> stack = new HashSet<>();
 
     public Person() {
@@ -36,7 +38,7 @@ public class Person implements Serializable {
         if(!isNumeric(name)) this.name = name;
         else throw new IllegalArgumentException("Name can not be numbers");
         this.birthdate = birthdate;
-        this.stack = stack;
+        for (String s : stack) addStack(s);
     }
 
     public UUID getId() {
