@@ -26,12 +26,12 @@ public class GlobalExceptionHandler {
         BindingResult result = e.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
 
-        StringBuilder errorMessage = new StringBuilder();
-        for (FieldError fieldError : fieldErrors) {
-            errorMessage.append(fieldError.getDefaultMessage()).append("; ");
-        }
+//        StringBuilder errorMessage = new StringBuilder();
+//        for (FieldError fieldError : fieldErrors) {
+//            errorMessage.append(fieldError.getDefaultMessage()).append("; ");
+//        }
 
-        return ResponseEntity.unprocessableEntity().body(errorMessage.toString());
+        return ResponseEntity.unprocessableEntity().body(fieldErrors.get(0).getDefaultMessage());
     }
 
 }
