@@ -4,6 +4,7 @@ import com.rinha.rinha_backend.entities.validators.IsNumeric;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class Person implements Serializable {
     private String name;
     @NotNull
     @NotBlank
+    @Pattern(regexp = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$")
     private String birthdate;
     //    @Pattern(regexp = "[a-zA-Z]+")
     private Set<String> stack = new HashSet<>();
