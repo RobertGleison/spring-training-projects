@@ -45,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonResponseDto> searchPersonByTerm(String searchTerm) {
-        logger.info("Entered in the method searchPersonById");
+        logger.info("Entered in the method searchPersonByTerm");
         return repository.findByTerm(searchTerm).stream().map(this::convertPersonToResponseDto).collect(Collectors.toList());
     }
 
