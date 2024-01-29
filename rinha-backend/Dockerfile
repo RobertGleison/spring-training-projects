@@ -1,4 +1,7 @@
 FROM openjdk:17-jdk-slim
-ARG JAR_FILE=target/rinha_backend-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+COPY target/rinha_backend-0.0.1-SNAPSHOT.jar /rinha.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/rinha.jar"]

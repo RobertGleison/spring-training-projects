@@ -26,7 +26,8 @@ public class Person implements Serializable {
     private String name;
     @NotNull
     @NotBlank
-    @Pattern(regexp = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$")
+    @Pattern(regexp = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$",
+            message = "The birthday must follow dd-mm-yyyy structure")
     private String birthdate;
     //    @Pattern(regexp = "[a-zA-Z]+")
     private Set<String> stack = new HashSet<>();
