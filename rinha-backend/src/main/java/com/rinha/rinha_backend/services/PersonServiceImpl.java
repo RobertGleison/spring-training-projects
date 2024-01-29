@@ -1,18 +1,23 @@
-package com.rinha.rinha_backend.person;
+package com.rinha.rinha_backend.services;
 
+import com.rinha.rinha_backend.dtos.PersonRequestDto;
+import com.rinha.rinha_backend.dtos.PersonResponseDto;
+import com.rinha.rinha_backend.entities.Person;
+import com.rinha.rinha_backend.repositories.PersonRepository;
+import com.rinha.rinha_backend.services.servicesInterfaces.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService {
+    Logger logger = Logger.getLogger(PersonServiceImpl.class.getName());
 
     @Autowired
     private PersonRepository repository;
@@ -40,6 +45,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonResponseDto> searchPersonByTerm(String searchTerm) {
+        logger.info("Entered in the method searchPersonById");
         return repository.findByTerm(searchTerm).stream().map(this::convertPersonToResponseDto).collect(Collectors.toList());
     }
 

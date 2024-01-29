@@ -1,9 +1,11 @@
-package com.rinha.rinha_backend.person;
+package com.rinha.rinha_backend.controllers;
 
+import com.rinha.rinha_backend.dtos.PersonRequestDto;
+import com.rinha.rinha_backend.dtos.PersonResponseDto;
+import com.rinha.rinha_backend.services.servicesInterfaces.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -17,7 +19,6 @@ public class PersonController {
 
     @Autowired
     private PersonService service;
-
 
     @GetMapping
     public ResponseEntity<List<PersonResponseDto>> getAllPerson(@RequestParam(name = "t", required = false) String searchTerm) {
@@ -38,8 +39,11 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<PersonResponseDto> createPerson(@Valid @RequestBody PersonRequestDto personRequestDto){
         PersonResponseDto personResponseDto = service.createPerson(personRequestDto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/" + personResponseDto.id()).build().toUri();
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/" + personResponseDto.id())
+                .build()
+                .toUri();
         return ResponseEntity.created(uri).body(personResponseDto);
     }
 }

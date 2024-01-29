@@ -1,33 +1,32 @@
-package com.rinha.rinha_backend.person;
+package com.rinha.rinha_backend.entities;
 
+import com.rinha.rinha_backend.entities.validators.IsNumeric;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Table(name="tb_person")
+@Table(name = "tb_person")
 public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @NotNull
     @NotBlank
-    @Length(max=32)
+    @Length(max = 32)
     private String nickname;
     @NotNull
     @NotBlank
-    @Length(max=100)
+    @Length(max = 100)
     private String name;
     @NotNull
     @NotBlank
     private String birthdate;
-//    @Pattern(regexp = "[a-zA-Z]+")
+    //    @Pattern(regexp = "[a-zA-Z]+")
     private Set<String> stack = new HashSet<>();
 
     public Person() {
@@ -35,7 +34,7 @@ public class Person implements Serializable {
 
     public Person(String nickname, String name, String birthdate, Set<String> stack) {
         this.nickname = nickname;
-        if(!isNumeric(name)) this.name = name;
+        if (!IsNumeric.validate(name)) this.name = name;
         else throw new IllegalArgumentException("Name can not be numbers");
         this.birthdate = birthdate;
         for (String s : stack) addStack(s);
@@ -45,24 +44,12 @@ public class Person implements Serializable {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getBirthdate() {
@@ -73,14 +60,14 @@ public class Person implements Serializable {
         return stack;
     }
 
-    public void addStack(String stack){
-        if(isNumeric(stack)) throw new IllegalArgumentException("Stacks can not be numbers");
-        if(stack.length() > 32) throw new IllegalArgumentException("Stacks must have 32 max length");
+    public void addStack(String stack) {
+        if (IsNumeric.validate(stack)) throw new IllegalArgumentException("Stacks can not be numbers");
+        if (stack.length() > 32) throw new IllegalArgumentException("Stacks must have 32 max length");
         this.stack.add(stack);
     }
 
-    public void removeStack(String stack){
-        if(this.stack.contains(stack)) this.stack.remove(stack);
+    public void removeStack(String stack) {
+        if (this.stack.contains(stack)) this.stack.remove(stack);
     }
 
     @Override
@@ -105,16 +92,5 @@ public class Person implements Serializable {
                 ", birthdate=" + birthdate +
                 ", stacks=" + stack +
                 '}';
-    }
-
-    private boolean isNumeric(String input) {
-        try{
-            Integer.parseInt(input);
-            Double.parseDouble(input);
-            return true;
-        }
-        catch(NumberFormatException e){
-            return false;
-        }
     }
 }
