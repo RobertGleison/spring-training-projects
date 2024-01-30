@@ -1,0 +1,58 @@
+version: '3.9'
+services:
+  api1:
+    image: robertgleison12/rinha_backend:rinha
+    hostname: api-1
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '0.7GB'
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: jdbc:mysql://mysql:3306/rinha_backend
+      DATABASE_USER: robert
+      DATABASE_PASSWORD: robert
+    networks:
+      - rinha-network
+  api2:
+    image: robertgleison12/rinha_backend:rinha
+    hostname: api-2
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '0.7GB'
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: jdbc:mysql://mysql:3306/rinha_backend
+      DATABASE_USER: robert
+      DATABASE_PASSWORD: robert
+    networks:
+      - rinha-network
+  mysql:
+    image: mysql:8.0.33
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.8'
+          memory: '1.5GB'
+    environment:
+      MYSQL_ROOT_PASSWORD: robert
+      MYSQL_PASSWORD: robert
+      MYSQL_USER: robert
+      MYSQL_DATABASE: rinha_backend
+
+    networks:
+      - rinha-network
+
+networks:
+  rinha-network:
+    driver: bridge
+
+
