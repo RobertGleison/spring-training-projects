@@ -12,7 +12,7 @@ services:
     depends_on:
       - mysql
     environment:
-      DATABASE_URL: jdbc:mysql://mysql:3306/rinha_backend
+      DATABASE_URL: jdbc:mysql://mysql/rinha_backend
       DATABASE_USER: robert
       DATABASE_PASSWORD: robert
     networks:
@@ -29,7 +29,7 @@ services:
     depends_on:
       - mysql
     environment:
-      DATABASE_URL: jdbc:mysql://mysql:3306/rinha_backend
+      DATABASE_URL: jdbc:mysql://mysql/rinha_backend
       DATABASE_USER: robert
       DATABASE_PASSWORD: robert
     networks:
@@ -37,6 +37,8 @@ services:
   mysql:
     image: mysql:8.0.33
     restart: always
+    ports:
+    - '3306:5000'
     deploy:
       resources:
         limits:
